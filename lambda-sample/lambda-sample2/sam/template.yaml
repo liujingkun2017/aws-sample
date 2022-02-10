@@ -10,7 +10,7 @@ Resources:
   LambdaSample2Function:
     Type: AWS::Serverless::Function
     Properties:
-      Timeout: 5
+      Timeout: 20
       CodeUri: /Users/jingkunl/Documents/code/aws-sample/lambda-sample/lambda-sample2/
       Handler: com.aws.sample.lambda.sample2.Handler::handleRequest
       Runtime: java8

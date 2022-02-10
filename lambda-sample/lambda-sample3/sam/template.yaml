@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'lambda-sample
+
+  this sample3 app
+
+  '
+
+Resources:
+  LambdaSample3Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 3
+      CodeUri: /Users/jingkunl/Documents/code/aws-sample/lambda-sample/lambda-sample3/
+      Handler: com.aws.sample.lambda.sample3.Handler::handleRequest
+      Runtime: java8
+      Architectures:
+        - x86_64
+    Metadata:
+      SamResourceId: lambda-sample3
+
+Outputs:
+
+  LambdaSample3Function:
+    Description: lambda-sample3 Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+        - LambdaSample3Function
+        - Arn
