@@ -24,6 +24,9 @@ public class Handler implements RequestHandler<Map<String, String>, String> {
         // process event
         logger.log("EVENT: " + gson.toJson(event));
         logger.log("EVENT TYPE: " + event.getClass().toString());
+
+        logger.log("this process has been done");
+
         return response;
     }
 }

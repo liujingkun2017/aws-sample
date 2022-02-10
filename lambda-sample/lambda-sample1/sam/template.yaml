@@ -11,7 +11,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Timeout: 3
-      CodeUri: /Users/jingkunl/Documents/code/aws-sample/lambda-sample/sample1/
+      CodeUri: /Users/jingkunl/Documents/code/aws-sample/lambda-sample/lambda-sample1/
       Handler: com.aws.sample.lambda.sample1.Handler::handleRequest
       Runtime: java8
       Architectures:
