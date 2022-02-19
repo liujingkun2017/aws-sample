@@ -7,8 +7,8 @@ ec2 = boto3.resource('ec2')
 cf = boto3.client('cloudformation')
 
 
-def new_instance(stack_name):
-    'new instance'
+def new_instance_with_eip(stack_name):
+    'new instance with eip'
 
     template_data = _parse_template("ec2-with-eip.yaml")
     params = {
@@ -16,7 +16,16 @@ def new_instance(stack_name):
         'TemplateBody': template_data,
     }
     stack_result = cf.create_stack(**params)
-    print(stack_result)
+
+def new_instance(stack_name):
+    'new instance'
+
+    template_data = _parse_template("ec2.yaml")
+    params = {
+        'StackName': stack_name,
+        'TemplateBody': template_data,
+    }
+    stack_result = cf.create_stack(**params)
 
 
 def _parse_template(template):
@@ -117,64 +126,64 @@ def create_tags(tags, instance_id):
         raise
 
 
-def describe_running_instances():
-    try:
-        ec2_client = boto3.client('ec2')
-        response = ec2_client.describe_instances(Filters=[
-            {
-                'Name': 'instance-state-code',
-                'Values': [
-                    '16',
-                ]
-            },
-            {
-                'Name': 'tag-value',
-                'Values': [
-                    'ec2-from-template',
-                ]
-            },
-        ])
+# def describe_running_instances():
+#     try:
+#         ec2_client = boto3.client('ec2')
+#         response = ec2_client.describe_instances(Filters=[
+#             {
+#                 'Name': 'instance-state-code',
+#                 'Values': [
+#                     '16',
+#                 ]
+#             },
+#             {
+#                 'Name': 'tag-value',
+#                 'Values': [
+#                     'ec2-from-template',
+#                 ]
+#             },
+#         ])
+#
+#         reservations = response["Reservations"]
+#         instanceIds = []
+#         for reservation in reservations:
+#             instanceIds.append(reservation["Instances"][0]["InstanceId"])
+#
+#     except ClientError:
+#         logger.exception("Couldn't describe instance %s.")
+#         raise
+#     else:
+#         return instanceIds
 
-        reservations = response["Reservations"]
-        instanceIds = []
-        for reservation in reservations:
-            instanceIds.append(reservation["Instances"][0]["InstanceId"])
 
-    except ClientError:
-        logger.exception("Couldn't describe instance %s.")
-        raise
-    else:
-        return instanceIds
-
-
-def describe_stop_instances():
-    try:
-        ec2_client = boto3.client('ec2')
-        response = ec2_client.describe_instances(Filters=[
-            {
-                'Name': 'instance-state-code',
-                'Values': [
-                    '80',
-                ]
-            },
-            {
-                'Name': 'tag-value',
-                'Values': [
-                    'ec2-from-template',
-                ]
-            },
-        ])
-
-        reservations = response["Reservations"]
-        instanceIds = []
-        for reservation in reservations:
-            instanceIds.append(reservation["Instances"][0]["InstanceId"])
-
-    except ClientError:
-        logger.exception("Couldn't describe instance %s.")
-        raise
-    else:
-        return instanceIds
+# def describe_stop_instances():
+#     try:
+#         ec2_client = boto3.client('ec2')
+#         response = ec2_client.describe_instances(Filters=[
+#             {
+#                 'Name': 'instance-state-code',
+#                 'Values': [
+#                     '80',
+#                 ]
+#             },
+#             {
+#                 'Name': 'tag-value',
+#                 'Values': [
+#                     'ec2-from-template',
+#                 ]
+#             },
+#         ])
+#
+#         reservations = response["Reservations"]
+#         instanceIds = []
+#         for reservation in reservations:
+#             instanceIds.append(reservation["Instances"][0]["InstanceId"])
+#
+#     except ClientError:
+#         logger.exception("Couldn't describe instance %s.")
+#         raise
+#     else:
+#         return instanceIds
 
 
 def describe_instances(filters):

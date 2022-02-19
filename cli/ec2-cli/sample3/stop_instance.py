@@ -4,11 +4,26 @@ if __name__ == '__main__':
 
     print("stop instance")
 
-    running_instanceIds = manage_instance.describe_running_instances()
-    print("running_instanceIds: ")
-    print(running_instanceIds)
+    filters = [
+        {
+            'Name': 'instance-state-code',
+            'Values': [
+                '16',
+            ]
+        },
+        {
+            'Name': 'tag:Name',
+            'Values': [
+                'ec2-from-template',
+            ]
+        },
+    ]
 
-    for instanceId in running_instanceIds:
-        manage_instance.stop_instance(instanceId)
+    running_instance_ids = manage_instance.describe_instances(filters)
+    print("running_instance_ids: ")
+    print(running_instance_ids)
+
+    for instance_id in running_instance_ids:
+        manage_instance.stop_instance(instance_id)
         print("stop success: ")
-        print(instanceId)
+        print(instance_id)

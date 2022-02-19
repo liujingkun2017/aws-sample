@@ -5,8 +5,12 @@ if __name__ == '__main__':
 
     print("terminate_instance")
 
-    # 从文件里面读取要释放的机器id
-    instanceIds = [""]
+    file = open("terminate_instance_file.txt")
 
-    # 释放ec2
-    manage_instance.terminate_instance("")
+    for instance_id in file.readlines():
+        instance_id = instance_id.strip('\n')
+        print(instance_id)
+        # 释放ec2
+        manage_instance.terminate_instance(instance_id)
+
+    file.close()
