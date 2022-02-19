@@ -48,7 +48,6 @@ if __name__ == '__main__':
                 'Value': 'on'
             },
         ]
-
         # 修改ec2标签
         manage_instance.create_tags(tags, instance_id)
         # 修改eip标签

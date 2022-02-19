@@ -38,7 +38,11 @@
 八、eip批量创建
 命令：python3 new_eip.py [数量]
 例如：python3 new_eip.py 5
-解释：批量创建5个eip，并且带有 Name=ec2-from-template 标签
+解释：批量创建5个eip，并且带有 EIPStatus=off 标签
+
+九、eip批量释放
+命令：python3 release_eip.py
+解释：删除没有和ec2关联，带有 EIPStatus=off 标签的eip
 
 
 注意：所有的命令执行完成后，会输出：exec finished !，命令执行完成后，ec2或者eip可能还在处理中
