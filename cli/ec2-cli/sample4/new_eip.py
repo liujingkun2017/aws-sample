@@ -1,17 +1,16 @@
-import manage_instance
+import manage_eip
 import sys
 
 if __name__ == '__main__':
 
-    print("new stack")
+    print("new eip")
 
     if len(sys.argv) == 1:
         print("fail")
     else:
-        prfix = sys.argv[1]
-        num = sys.argv[2]
+        num = sys.argv[1]
         for i in range(0, int(num)):
-            manage_instance.new_instance(prfix + str(i))
+            manage_eip.allocate_address()
 
     print("---------------------------------------------")
     print("exec finished !")

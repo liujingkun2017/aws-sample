@@ -12,3 +12,6 @@ if __name__ == '__main__':
         num = sys.argv[2]
         for i in range(0, int(num)):
             manage_instance.new_instance_with_eip(prfix + str(i))
+
+    print("---------------------------------------------")
+    print("exec finished !")

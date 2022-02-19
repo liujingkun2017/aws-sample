@@ -6,6 +6,23 @@ logger = logging.getLogger(__name__)
 ec2 = boto3.resource('ec2')
 
 
+def allocate_address():
+    ec2_client = boto3.client('ec2')
+    allocation = ec2_client.allocate_address(
+        Domain='vpc',
+        TagSpecifications=[
+            {
+                'ResourceType': 'elastic-ip',
+                'Tags': [
+                    {
+                        'Key': 'EIPStatus',
+                        'Value': 'off'
+                    },
+                ]
+            },
+        ]
+    )
+
 def associate_elastic_ip(allocation_id, instance_id):
     """
     Associates an Elastic IP address with an instance. When this association is

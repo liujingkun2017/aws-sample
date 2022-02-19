@@ -1,16 +1,26 @@
 import manage_instance
-import sys
 
 if __name__ == '__main__':
 
     print("terminate_instance")
 
-    file = open("terminate_instance_config_file.txt")
+    filters = [
+        {
+            'Name': 'tag:Name',
+            'Values': [
+                'ec2-from-template',
+            ]
+        },
+    ]
 
-    for instance_id in file.readlines():
-        instance_id = instance_id.strip('\n')
-        print(instance_id)
-        # 释放ec2
+    terminate_instance_ids = manage_instance.describe_instances(filters)
+    print("terminate_instance_ids: ")
+    print(terminate_instance_ids)
+
+    for instance_id in terminate_instance_ids:
         manage_instance.terminate_instance(instance_id)
+        print("terminate success: ")
+        print(instance_id)
 
-    file.close()
+    print("---------------------------------------------")
+    print("exec finished !")

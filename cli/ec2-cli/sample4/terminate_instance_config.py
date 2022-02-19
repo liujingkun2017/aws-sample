@@ -1,9 +1,8 @@
 import manage_instance
-import sys
 
 if __name__ == '__main__':
 
-    print("terminate_instance")
+    print("terminate_instance_config")
 
     file = open("terminate_instance_config_file.txt")
 
@@ -14,3 +13,6 @@ if __name__ == '__main__':
         manage_instance.terminate_instance(instance_id)
 
     file.close()
+
+    print("---------------------------------------------")
+    print("exec finished !")

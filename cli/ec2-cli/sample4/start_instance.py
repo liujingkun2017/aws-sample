@@ -26,3 +26,6 @@ if __name__ == '__main__':
         manage_instance.start_instance(instance_id)
         print("start success: ")
         print(instance_id)
+
+    print("---------------------------------------------")
+    print("exec finished !")

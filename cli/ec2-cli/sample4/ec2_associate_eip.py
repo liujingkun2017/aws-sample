@@ -53,3 +53,6 @@ if __name__ == '__main__':
         manage_instance.create_tags(tags, instance_id)
         # 修改eip标签
         manage_eip.create_tags(tags, eip_id)
+
+    print("---------------------------------------------")
+    print("exec finished !")
