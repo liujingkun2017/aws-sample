@@ -68,7 +68,6 @@ def stop_instance(instance_id):
     else:
         return response
 
-
 def terminate_instance(instance_id):
     """
     Terminates an instance. The request returns immediately. To wait for the
@@ -100,20 +99,6 @@ def disassociate_elastic_ip(allocation_id):
     except ClientError:
         logger.exception(
             "Couldn't disassociate Elastic IP %s from its instance.", allocation_id)
-        raise
-
-
-def create_tags(tags, instance_id):
-    try:
-        ec2_client = boto3.client('ec2')
-        ec2_client.create_tags(
-            Resources=[
-                instance_id,
-            ],
-            Tags=tags)
-
-    except ClientError:
-        logger.exception("Couldn't create_tags tags %s instance_id %s.", tags, instance_id)
         raise
 
 
@@ -175,20 +160,3 @@ def describe_stop_instances():
         raise
     else:
         return instanceIds
-
-
-def describe_instances(filters):
-    try:
-        ec2_client = boto3.client('ec2')
-        response = ec2_client.describe_instances(Filters=filters)
-
-        reservations = response["Reservations"]
-        instance_ids = []
-        for reservation in reservations:
-            instance_ids.append(reservation["Instances"][0]["InstanceId"])
-
-    except ClientError:
-        logger.exception("Couldn't describe instance %s.")
-        raise
-    else:
-        return instance_ids
