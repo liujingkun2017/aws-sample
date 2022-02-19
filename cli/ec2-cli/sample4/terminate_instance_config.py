@@ -33,11 +33,10 @@ if __name__ == '__main__':
         ]
         eips = manage_eip.describe_eips(eip_filters)
         if len(eips) > 0:
-            manage_eip.create_tags(tags, eips[0])
-
-        # 解绑ec2和eip
-        if len(eips) > 0:
+            # 解绑ec2和eip
             manage_eip.disassociate_elastic_ip(eips[0])
+            # 修改eip标签
+            manage_eip.create_tags(tags, eips[0])
 
         # 释放
         manage_instance.terminate_instance(instance_id)
