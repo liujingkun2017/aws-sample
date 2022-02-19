@@ -10,7 +10,7 @@ cf = boto3.client('cloudformation')
 def new_instance(stack_name):
     'new instance'
 
-    template_data = _parse_template("ec2-eip-test.yaml")
+    template_data = _parse_template("ec2-with-eip.yaml")
     params = {
         'StackName': stack_name,
         'TemplateBody': template_data,

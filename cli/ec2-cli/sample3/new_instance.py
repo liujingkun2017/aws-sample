@@ -1,12 +1,13 @@
 import manage_instance
+import sys
 
 if __name__ == '__main__':
 
-    stop_instanceIds = manage_instance.describe_stop_instances()
-    print("stop_instanceIds: ")
-    print(stop_instanceIds)
+    print("new instance")
 
-    for instanceId in stop_instanceIds:
-        manage_instance.start_instance(instanceId)
-        print("start success: ")
-        print(instanceId)
+    if len(sys.argv) == 1:
+        print("fail")
+    else:
+        num = sys.argv[1]
+        for i in range(0, int(num)):
+            manage_instance.new_instance("ec2-stack-" + str(i))

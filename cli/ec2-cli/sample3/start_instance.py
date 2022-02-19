@@ -2,6 +2,8 @@ import manage_instance
 
 if __name__ == '__main__':
 
+    print("start instance")
+
     stop_instanceIds = manage_instance.describe_stop_instances()
     print("stop_instanceIds: ")
     print(stop_instanceIds)

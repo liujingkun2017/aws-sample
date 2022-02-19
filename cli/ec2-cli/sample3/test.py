@@ -9,6 +9,6 @@ if __name__ == '__main__':
     # print("stop_instanceIds: ")
     # print(stop_instanceIds)
 
-    # manage_instance.delete_instance("myteststack1")
-    manage_instance.new_instance("myteststack000")
+    manage_instance.delete_instance("myteststack1")
+    # manage_instance.new_instance("myteststack000")
 
