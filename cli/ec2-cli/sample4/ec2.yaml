@@ -1,13 +1,7 @@
 Metadata:
   License: Apache-2.0
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'AWS CloudFormation Sample Template Sample template EIP_With_Association:
-  This template shows how to associate an Elastic IP address with an Amazon EC2 instance
-  - you can use this same technique to associate an EC2 instance with an Elastic IP
-  Address that is not created inside the template by replacing the EIP reference in
-  the AWS::EC2::EIPAssoication resource type with the IP address of the external EIP.
-  **WARNING** This template creates an Amazon EC2 instance and an Elastic IP Address.
-  You will be billed for the AWS resources used if you create a stack from this template.'
+Description: 'AWS CloudFormation Sample Template'
 Parameters:
   InstanceType:
     Description: WebServer EC2 instance type
@@ -23,10 +17,6 @@ Parameters:
                     i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge,
                     d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge]
     ConstraintDescription: must be a valid EC2 instance type.
-#  KeyName:
-#    Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
-#    Type: AWS::EC2::KeyPair::KeyName
-#    ConstraintDescription: must be the name of an existing EC2 KeyPair.
   SSHLocation:
     Description: The IP address range that can be used to SSH to the EC2 instances
     Type: String
@@ -41,21 +31,25 @@ Resources:
     Properties:
       InstanceType: !Ref 'InstanceType'
       SecurityGroups: [!Ref 'InstanceSecurityGroup']
-      KeyName: 'ec2-1'
-      ImageId: 'ami-0f98fc9fff42b5d70'
+      ImageId: 'ami-0c19f80dba70861db'
       Tags:
         - Key: Name
           Value: 'ec2-from-template'
         - Key: EIPStatus
           Value: 'off'
+      UserData:
+        Fn::Base64: !Sub |
+          <script>
+          powershell -Command "net user Administrator 'ljkLJK246437'"
+          </script>
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH access
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
+          FromPort: '3389'
+          ToPort: '3389'
           CidrIp: !Ref 'SSHLocation'
 
 Outputs:

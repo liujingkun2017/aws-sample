@@ -23,10 +23,6 @@ Parameters:
                      i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge,
                      d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge ]
     ConstraintDescription: must be a valid EC2 instance type.
-  #  KeyName:
-  #    Description: Name of an existing EC2 KeyPair to enable SSH access to the instances
-  #    Type: AWS::EC2::KeyPair::KeyName
-  #    ConstraintDescription: must be the name of an existing EC2 KeyPair.
   SSHLocation:
     Description: The IP address range that can be used to SSH to the EC2 instances
     Type: String
@@ -39,14 +35,15 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      UserData: !Base64
-        Fn::Join:
-          - ''
-          - [ IPAddress=, !Ref 'IPAddress' ]
+      UserData:
+        Fn::Base64: !Sub |
+          IPAddress=!Ref 'IPAddress'
+          <script>
+          powershell -Command "net user Administrator 'ljkLJK246437'"
+          </script>
       InstanceType: !Ref 'InstanceType'
       SecurityGroups: [ !Ref 'InstanceSecurityGroup' ]
-      KeyName: 'ec2-1'
-      ImageId: 'ami-0f98fc9fff42b5d70'
+      ImageId: 'ami-0c19f80dba70861db'
       Tags:
         - Key: Name
           Value: 'ec2-from-template'
@@ -58,8 +55,8 @@ Resources:
       GroupDescription: Enable SSH access
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
+          FromPort: '3389'
+          ToPort: '3389'
           CidrIp: !Ref 'SSHLocation'
   IPAddress:
     Type: AWS::EC2::EIP
