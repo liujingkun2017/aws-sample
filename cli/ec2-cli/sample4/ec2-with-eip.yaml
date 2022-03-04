@@ -42,22 +42,22 @@ Resources:
           powershell -Command "net user Administrator 'ljkLJK246437'"
           </script>
       InstanceType: !Ref 'InstanceType'
-      SecurityGroups: [ !Ref 'InstanceSecurityGroup' ]
+      SecurityGroups: ['test-for-win']
       ImageId: 'ami-0c19f80dba70861db'
       Tags:
         - Key: Name
           Value: 'ec2-from-template'
         - Key: EIPStatus
           Value: 'on'
-  InstanceSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Enable SSH access
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: '3389'
-          ToPort: '3389'
-          CidrIp: !Ref 'SSHLocation'
+#  InstanceSecurityGroup:
+#    Type: AWS::EC2::SecurityGroup
+#    Properties:
+#      GroupDescription: Enable SSH access
+#      SecurityGroupIngress:
+#        - IpProtocol: tcp
+#          FromPort: '3389'
+#          ToPort: '3389'
+#          CidrIp: !Ref 'SSHLocation'
   IPAddress:
     Type: AWS::EC2::EIP
     Properties:

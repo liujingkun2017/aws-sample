@@ -30,7 +30,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: !Ref 'InstanceType'
-      SecurityGroups: [!Ref 'InstanceSecurityGroup']
+      SecurityGroups: ['test-for-win']
       ImageId: 'ami-0c19f80dba70861db'
       Tags:
         - Key: Name
@@ -42,15 +42,6 @@ Resources:
           <script>
           powershell -Command "net user Administrator 'ljkLJK246437'"
           </script>
-  InstanceSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Enable SSH access
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: '3389'
-          ToPort: '3389'
-          CidrIp: !Ref 'SSHLocation'
 
 Outputs:
   InstanceId:

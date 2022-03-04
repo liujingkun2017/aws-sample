@@ -134,7 +134,10 @@ def describe_instances(filters):
         reservations = response["Reservations"]
         instance_ids = []
         for reservation in reservations:
-            instance_ids.append(reservation["Instances"][0]["InstanceId"])
+            instances = reservation["Instances"]
+            for instance in instances:
+                instance_ids.append(instance["InstanceId"])
+
 
     except ClientError:
         logger.exception("Couldn't describe instance %s.")
