@@ -53,5 +53,7 @@ if __name__ == '__main__':
         # 修改eip标签
         manage_eip.create_tags(tags, eip_id)
 
+        print(i)
+
     print("---------------------------------------------")
     print("exec finished !")
