@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'lambda-sample
+
+  this sample5 app
+
+  '
+
+Resources:
+  LambdaSample5Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 3
+      CodeUri: /Users/jingkunl/Documents/code/aws-sample/lambda-sample/lambda-sample5/
+      Handler: com.aws.sample.lambda.sample5.Handler::handleRequest
+      Runtime: java8
+      Architectures:
+        - x86_64
+    Metadata:
+      SamResourceId: lambda-sample5
+
+Outputs:
+
+  LambdaSample5Function:
+    Description: lambda-sample5 Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+        - LambdaSample5Function
+        - Arn
