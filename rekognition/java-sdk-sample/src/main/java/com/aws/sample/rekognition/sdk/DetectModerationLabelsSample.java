@@ -50,13 +50,18 @@ public class DetectModerationLabelsSample {
 
             DetectModerationLabelsRequest moderationLabelsRequest = DetectModerationLabelsRequest.builder().image(souImage).minConfidence(60F).build();
 
-            long start = System.currentTimeMillis();
+            DetectModerationLabelsResponse moderationLabelsResponse = null;
 
-            DetectModerationLabelsResponse moderationLabelsResponse = rekClient.detectModerationLabels(moderationLabelsRequest);
+            for (int i = 0; i < 10; i++) {
+                long start = System.currentTimeMillis();
 
-            long end = System.currentTimeMillis();
+                moderationLabelsResponse = rekClient.detectModerationLabels(moderationLabelsRequest);
 
-            System.out.println("cost time:" + (end - start));
+                long end = System.currentTimeMillis();
+
+                System.out.println("cost time:" + (end - start));
+            }
+
 
             // Display the results
             List<ModerationLabel> labels = moderationLabelsResponse.moderationLabels();
