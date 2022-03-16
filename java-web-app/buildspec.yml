@@ -9,10 +9,12 @@ phases:
       - echo Nothing to do in the pre_build phase...
   build:
     commands:
+      - echo ---------------------------------------------------------------------------
       - echo Build started on `date`
       - mvn clean install
   post_build:
     commands:
+      - echo ---------------------------------------------------------------------------
       - echo Build completed on `date`
 artifacts:
   files:
